@@ -40,6 +40,19 @@ func NewGTMClient() *GTMClient {
 	}
 }
 
+func NewSiteShieldClient() *SiteShieldClient {
+	return &SiteShieldClient{
+		NewCredentials(),
+		&http.Client{},
+	}
+}
+func SiteShieldClientWithCreds(accessToken, clientToken, clientSecret, apiHost string) *SiteShieldClient {
+	return &SiteShieldClient{
+		&AuthCredentials{accessToken, clientToken, clientSecret, apiHost},
+		&http.Client{},
+	}
+}
+
 // NewPAPIClient returns a PAPIClient using the
 // AKAMAI_EDGEGRID_ACCESS_TOKEN, AKAMAI_EDGEGRID_CLIENT_TOKEN,
 // AKAMAI_EDGEGRID_CLIENT_SECRET, and AKAMAI_EDGEGRID_HOST environment
