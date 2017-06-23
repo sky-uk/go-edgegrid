@@ -210,3 +210,17 @@ func (c *GTMClient) PropertyDelete(domain string, property string) (bool, error)
 	}
 	return true, nil
 }
+
+//PropertiesDiagnostic returns information from the diagnostic tools api about properties for all domains
+func (c *GTMClient) PropertiesDiagnostic() (PropertiesDiagnostic, error) {
+	prop := &PropertiesDiagnostic{}
+	err := resourceRequest(c, "GET", propertiesDiagnosticEndpoint(c.GetCredentials()), nil, prop)
+	return *prop, err
+}
+
+//PropertiesDiagnosticIps returns the IP addresses for a given GTM property for a domain
+func (c *GTMClient) PropertiesDiagnosticIps(property, domain string) (PropertiesDiagnosticIps, error) {
+	prop := &PropertiesDiagnosticIps{}
+	err := resourceRequest(c, "GET", propertiesDiagnosticIpsEndpoint(c.GetCredentials(), property, domain), nil, prop)
+	return *prop, err
+}

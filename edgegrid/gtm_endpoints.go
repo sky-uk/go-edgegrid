@@ -5,6 +5,7 @@ import (
 )
 
 const gtmPath = "/config-gtm/v1/"
+const gtmDiagnostics = "/diagnostic-tools/v2/gtm/"
 
 func gtmBase(c *AuthCredentials) string {
 	return concat([]string{
@@ -13,10 +14,32 @@ func gtmBase(c *AuthCredentials) string {
 	})
 }
 
+func gtmDiagnosticsBase(c *AuthCredentials) string {
+	return concat([]string{
+		c.APIHost,
+		gtmDiagnostics,
+	})
+}
+
 func domainsEndpoint(c *AuthCredentials) string {
 	return concat([]string{
 		gtmBase(c),
 		"domains",
+	})
+}
+
+func propertiesDiagnosticEndpoint(c *AuthCredentials) string {
+	return concat([]string{
+		gtmDiagnosticsBase(c),
+		"gtm-properties",
+	})
+}
+
+func propertiesDiagnosticIpsEndpoint(c *AuthCredentials, property, domain string) string {
+	return concat([]string{
+		gtmDiagnosticsBase(c),
+		property, "/",
+		domain, "/gtm-property-ips",
 	})
 }
 
@@ -62,3 +85,4 @@ func propertyEndpoint(c *AuthCredentials, domain, property string) string {
 		property,
 	})
 }
+

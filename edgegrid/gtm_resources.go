@@ -4,6 +4,15 @@ import (
 	"strings"
 )
 
+
+type PropertiesDiagnostic struct {
+	Diagnostic []interface{} `json:"gtmProperties"`
+}
+
+type PropertiesDiagnosticIps struct {
+	Diagnostic interface{} `json:"gtmPropertyIps"`
+}
+
 // Domains is a representation of the Akamai GTM
 // domains response available at:
 // http://apibase.com/config-gtm/v1/domains
